@@ -20,21 +20,30 @@ namespace Явный_шаблок_крестик
 
             double h = 0;
 
-            
+            DataTable dt = new DataTable();
+
+            for (int j = 0; j < 11; j++)
+            {
+                dt.Columns.Add(new DataColumn());
+            }
+
 
             for (int i = 0; i < 10; i++)
-            {
+                {
                 chart1.Series.Add(Convert.ToString(i));
                 chart1.Series[i].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+                DataRow dr = dt.NewRow();
                 for (int j = 0; j< 11; j++)
                 {
                     chart1.Series[i].Points.AddXY(h, result[i,j]);
                     h += 0.1;
-                    textBox1.Text += "\t" + result[i, j];
+                    dr[j] = result[i, j];
                 }
+                dt.Rows.Add(dr);
                 h = 0;
-                textBox1.Text += "\r\n";
+                
             }
+            dataGridView1.DataSource = dt;
         }
     }
 }
